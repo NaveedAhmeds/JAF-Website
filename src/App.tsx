@@ -12,7 +12,7 @@ import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
-//Test comment
+//Test commentr
 
 const queryClient = new QueryClient();
 
