@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -10,17 +9,17 @@ const Contact = () => {
   const contactInfo = [
     {
       title: "Phone",
-      details: ["+91 98765 43210", "+91 87654 32109"],
+      details: ["+91 98481 47003"],
       icon: "📞"
     },
     {
-      title: "Email",
+      title: "Email", 
       details: ["info@jaflogistics.com", "operations@jaflogistics.com"],
       icon: "📧"
     },
     {
       title: "Address",
-      details: ["Corporate Office:", "Mumbai, Maharashtra, India"],
+      details: ["Zehra Towers, 8-1-43/A/66, Shaikpet Rd,", "opp. HP Petrol Pump, Sathya Colony,", "Qutub Shahi Tombs, Hyderabad,", "Telangana 500008, India"],
       icon: "📍"
     },
     {
@@ -28,13 +27,6 @@ const Contact = () => {
       details: ["24/7 Operations", "Emergency Support Available"],
       icon: "🕒"
     }
-  ];
-
-  const offices = [
-    { city: "Mumbai", address: "Andheri East, Mumbai - 400069", phone: "+91 98765 43210" },
-    { city: "Delhi", address: "Gurgaon, Haryana - 122001", phone: "+91 98765 43211" },
-    { city: "Bangalore", address: "Electronic City, Bangalore - 560100", phone: "+91 98765 43212" },
-    { city: "Pune", address: "Hinjewadi, Pune - 411057", phone: "+91 98765 43213" }
   ];
 
   return (
@@ -162,7 +154,7 @@ const Contact = () => {
                     🚨 Emergency Support
                   </h3>
                   <p className="text-red-800 mb-2">24/7 Crisis Management Hotline</p>
-                  <p className="font-semibold text-red-900">+91 98765 43299</p>
+                  <p className="font-semibold text-red-900">+91 98481 47003</p>
                   <p className="text-sm text-red-700 mt-2">
                     For urgent transportation issues, breakdowns, or emergencies
                   </p>
@@ -173,31 +165,35 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Office Locations */}
+      {/* Office Location */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Our <span className="text-orange-500">Locations</span>
+              Our <span className="text-orange-500">Location</span>
             </h2>
             <p className="text-xl text-gray-600">
-              Serving major cities across India with local expertise
+              Serving Hyderabad and surrounding areas with local expertise
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {offices.map((office, index) => (
-              <Card key={index} className="text-center border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <CardContent className="p-6">
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">🏢</span>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{office.city}</h3>
-                  <p className="text-gray-600 mb-2">{office.address}</p>
-                  <p className="text-orange-500 font-semibold">{office.phone}</p>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="flex justify-center">
+            <Card className="text-center border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 max-w-md">
+              <CardContent className="p-8">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🏢</span>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Hyderabad Office</h3>
+                <div className="text-gray-600 mb-4 space-y-1">
+                  <p>Zehra Towers, 8-1-43/A/66</p>
+                  <p>Shaikpet Rd, opp. HP Petrol Pump</p>
+                  <p>Sathya Colony, Qutub Shahi Tombs</p>
+                  <p>Hyderabad, Telangana 500008</p>
+                  <p>India</p>
+                </div>
+                <p className="text-orange-500 font-semibold">+91 98481 47003</p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -207,7 +203,7 @@ const Contact = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Find Us</h2>
-            <p className="text-lg text-gray-600">Corporate Headquarters - Mumbai</p>
+            <p className="text-lg text-gray-600">Hyderabad, Telangana</p>
           </div>
           
           <div className="bg-gray-300 rounded-lg h-96 flex items-center justify-center border-2 border-dashed border-gray-400">
@@ -229,9 +225,9 @@ const Contact = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-orange-500 hover:bg-orange-600">
-              Call Now: +91 98765 43210
+              Call Now: +91 98481 47003
             </Button>
-            <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-blue-900">
+            <Button size="lg" variant="outline" className="text-black border-white bg-white hover:bg-gray-100 hover:text-black">
               Schedule Meeting
             </Button>
           </div>
