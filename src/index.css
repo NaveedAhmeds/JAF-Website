@@ -40,19 +40,12 @@ All colors MUST be HSL.
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -104,6 +97,7 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
     cursor: default;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
 
@@ -131,12 +125,21 @@ All colors MUST be HSL.
   50% { box-shadow: 0 0 20px rgba(249, 115, 22, 0.6); }
 }
 
+@keyframes pulse-gentle {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
 
 .animate-glow {
   animation: glow 2s ease-in-out infinite;
+}
+
+.animate-pulse-gentle {
+  animation: pulse-gentle 2s ease-in-out infinite;
 }
 
 /* Smooth scrolling */
@@ -159,3 +162,9 @@ html {
 .animate-fade-in {
   animation: fade-in 0.6s ease-out;
 }
+
+/* Staggered animation delays */
+.animate-fade-in:nth-child(1) { animation-delay: 0.1s; }
+.animate-fade-in:nth-child(2) { animation-delay: 0.2s; }
+.animate-fade-in:nth-child(3) { animation-delay: 0.3s; }
+.animate-fade-in:nth-child(4) { animation-delay: 0.4s; }

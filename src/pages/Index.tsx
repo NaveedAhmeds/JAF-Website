@@ -1,11 +1,9 @@
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import HeroSection from "@/components/HeroSection";
 import ServicesSection from "@/components/ServicesSection";
 import StatsSection from "@/components/StatsSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
 import ClientsSection from "@/components/ClientsSection";
 
 const Index = () => {
@@ -14,14 +12,13 @@ const Index = () => {
       <HeroSection />
       <ServicesSection />
       <StatsSection />
-      <TestimonialsSection />
       <ClientsSection />
       
       {/* CTA Section */}
-      <section className="bg-blue-900 text-white py-16">
+      <section className="bg-blue-900 dark:bg-gray-900 text-white py-16 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4 hover:text-orange-300 transition-colors duration-300">Ready to Experience Reliable Transportation?</h2>
-          <p className="text-xl mb-8 text-blue-100 hover:text-white transition-colors duration-300">
+          <p className="text-xl mb-8 text-blue-100 dark:text-gray-300 hover:text-white transition-colors duration-300">
             Join hundreds of satisfied corporate clients who trust JAF Logistics
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -31,7 +28,7 @@ const Index = () => {
               </Button>
             </Link>
             <Link to="/contact">
-              <Button size="lg" variant="outline" className="text-black border-white bg-white hover:bg-gray-100 hover:text-black hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-xl">
+              <Button size="lg" variant="outline" className="text-black dark:text-white border-white bg-white dark:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-black dark:hover:text-white hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-xl">
                 Contact Us
               </Button>
             </Link>
