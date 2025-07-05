@@ -35,9 +35,9 @@ const Navbar = () => {
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link to="/" className="flex items-center">
-            <div className="text-2xl font-bold text-blue-900">
-              JAF <span className="text-orange-500">Logistics</span>
+          <Link to="/" className="flex items-center hover:scale-105 transform transition-all duration-300">
+            <div className="text-2xl font-bold text-blue-900 hover:text-blue-700 transition-colors duration-300">
+              JAF <span className="text-orange-500 hover:text-orange-400 transition-colors duration-300">Logistics</span>
             </div>
           </Link>
 
@@ -47,23 +47,25 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`text-gray-700 hover:text-blue-900 transition-colors duration-200 font-medium ${
+                className={`text-gray-700 hover:text-blue-900 transition-all duration-300 font-medium hover:scale-110 transform ${
                   location.pathname === link.path ? "text-blue-900 border-b-2 border-orange-500" : ""
                 }`}
               >
                 {link.name}
               </Link>
             ))}
-            <Button className="bg-orange-500 hover:bg-orange-600 text-white">
-              Get Quote
-            </Button>
+            <Link to="/contact">
+              <Button className="bg-orange-500 hover:bg-orange-600 text-white hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-xl">
+                Get Quote
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 hover:text-blue-900 transition-colors"
+              className="text-gray-700 hover:text-blue-900 transition-colors hover:scale-110 transform duration-300"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -72,13 +74,13 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden bg-white border-t">
+          <div className="md:hidden bg-white border-t animate-fade-in">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`block px-3 py-2 text-gray-700 hover:text-blue-900 transition-colors duration-200 font-medium ${
+                  className={`block px-3 py-2 text-gray-700 hover:text-blue-900 transition-all duration-300 font-medium hover:translate-x-2 transform ${
                     location.pathname === link.path ? "text-blue-900 bg-blue-50" : ""
                   }`}
                 >
@@ -86,9 +88,11 @@ const Navbar = () => {
                 </Link>
               ))}
               <div className="px-3 py-2">
-                <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white">
-                  Get Quote
-                </Button>
+                <Link to="/contact">
+                  <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white hover:scale-105 transform transition-all duration-300">
+                    Get Quote
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
