@@ -167,3 +167,67 @@ body.dark a:hover {
 .animate-fade-in:nth-child(4) {
 	animation-delay: 0.4s;
 }
+
+/* In your global CSS or tailwind.css */
+.dotted-bg-light {
+	background-image: radial-gradient(circle, #000000 1px, transparent 1px);
+	background-position: 0 0, 25px 25px;
+	background-size: 50px 50px;
+}
+
+.dotted-bg-dark {
+	background-image: radial-gradient(
+			circle 1px,
+			rgba(200, 200, 200, 0.15) 1px,
+			transparent 1px
+		),
+		radial-gradient(circle 1px, rgb(255, 255, 255) 1px, transparent 1px);
+	background-position: 0 0, 25px 25px;
+	background-size: 50px 50px;
+}
+
+/* Dots background - light and dark versions */
+.bg-dots-light {
+	background-image: radial-gradient(circle, #fffdfd 1px, transparent 1px);
+	background-size: 20px 20px;
+}
+
+.bg-dots-dark {
+	background-image: radial-gradient(
+		circle,
+		rgb(255, 255, 255) 1px,
+		transparent 1px
+	);
+	background-size: 20px 20px;
+}
+
+/* Slow pulse animation */
+@keyframes pulse-slow {
+	0%,
+	100% {
+		opacity: 0.75;
+		box-shadow: 0 0 6px 0 rgba(255, 165, 0, 0.4);
+	}
+	50% {
+		opacity: 1;
+		box-shadow: 0 0 12px 4px rgba(255, 165, 0, 0.6);
+	}
+}
+
+.animate-pulse-slow {
+	animation: pulse-slow 3s ease-in-out infinite;
+}
+
+/* Marquee animation - you probably have this, but just in case */
+@keyframes marquee {
+	0% {
+		transform: translateX(0%);
+	}
+	100% {
+		transform: translateX(-50%);
+	}
+}
+
+.animate-marquee {
+	animation: marquee 20s linear infinite;
+}

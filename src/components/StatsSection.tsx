@@ -44,10 +44,10 @@ const StatsSection = () => {
 		>
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="text-center mb-12">
-					<h2 className="text-4xl lg:text-5xl font-extrabold text-orange-500 hover:text-orange-600 transition-colors duration-300 drop-shadow-sm">
+					<h2 className="text-4xl lg:text-5xl font-extrabold text-black-500 hover:text-orange-600 transition-colors duration-300 drop-shadow-sm">
 						Trusted by Industry Leaders
 					</h2>
-					<p className="text-xl font-semibold text-indigo-100 hover:text-white transition-colors duration-300 drop-shadow">
+					<p className="text-xl font-semibold text-black -100 hover:text-white transition-colors duration-300 drop-shadow">
 						Numbers that speak for our commitment to excellence
 					</p>
 				</div>
