@@ -1,8 +1,8 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Truck } from 'lucide-react';
-import { ThemeToggle } from './ThemeToggle';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +14,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-lg fixed w-full top-0 z-50 transition-colors duration-300">
+    <nav className="bg-white shadow-lg fixed w-full top-0 z-50 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -22,7 +22,7 @@ const Navbar = () => {
             <div className="bg-blue-600 text-white p-2 rounded-lg shadow-lg">
               <Truck className="h-6 w-6" />
             </div>
-            <span className="text-xl font-bold text-gray-900 dark:text-white">JAF Logistics</span>
+            <span className="text-xl font-bold text-gray-900">JAF Logistics</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -31,12 +31,11 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className="text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium transition-colors duration-300 hover:scale-105 transform"
+                className="text-gray-700 hover:text-orange-500 font-medium transition-colors duration-300 hover:scale-105 transform"
               >
                 {item.name}
               </Link>
             ))}
-            <ThemeToggle />
             <Link to="/contact">
               <Button className="bg-orange-500 hover:bg-orange-600 text-white hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-xl">
                 Get Quote
@@ -45,11 +44,10 @@ const Navbar = () => {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-2">
-            <ThemeToggle />
+          <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 p-2"
+              className="text-gray-700 hover:text-orange-500 p-2"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -58,13 +56,13 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden bg-white dark:bg-gray-900 border-t dark:border-gray-700">
+          <div className="md:hidden bg-white border-t">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.path}
-                  className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors duration-300"
+                  className="block px-3 py-2 text-gray-700 hover:text-orange-500 hover:bg-gray-50 rounded-md transition-colors duration-300"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
