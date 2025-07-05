@@ -113,14 +113,21 @@ const ServicesSection = () => {
 		<section
 			className={`
           py-20 relative transition-colors duration-300
-          bg-white text-black dark:bg-zinc-900 dark:text-white
+          bg-white text-black
+          dark:bg-zinc-900 dark:text-white
         `}
 		>
-			{/* Dotted background pattern: black dots on light, light dots on dark */}
+			{/* Dotted map pattern bg */}
 			<div
 				aria-hidden="true"
-				className="absolute inset-0 pointer-events-none bg-dots-light dark:bg-dots-dark"
-				style={{ opacity: 0.1, zIndex: 0 }}
+				className="absolute inset-0 pointer-events-none"
+				style={{
+					backgroundImage:
+						"radial-gradient(circle 1px, rgba(200,200,200,0.15) 1px, transparent 1px), radial-gradient(circle 1px, rgba(200,200,200,0.15) 1px, transparent 1px)",
+					backgroundPosition: "0 0, 25px 25px",
+					backgroundSize: "50px 50px",
+					zIndex: 0,
+				}}
 			/>
 
 			<div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
