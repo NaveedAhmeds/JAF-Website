@@ -56,14 +56,25 @@ const Contact = () => {
 	const [service, setService] = useState("");
 
 	return (
-		<div
-			className="pt-16 bg-white dark:bg-black text-gray-900 dark:text-white"
-			style={{
-				backgroundImage:
-					"radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px)",
-				backgroundSize: "20px 20px",
-			}}
-		>
+		<div className="pt-16 bg-white dark:bg-black text-gray-900 dark:text-white bg-dotted-light">
+			<style jsx global>{`
+				.bg-dotted-light {
+					background-image: radial-gradient(
+						circle,
+						rgba(0, 0, 0, 0.05) 1px,
+						transparent 1px
+					);
+					background-size: 20px 20px;
+				}
+				.dark .bg-dotted-light {
+					background-image: radial-gradient(
+						circle,
+						rgba(255, 255, 255, 0.15) 1px,
+						transparent 1px
+					);
+				}
+			`}</style>
+
 			{/* Hero Section */}
 			<section className="bg-transparent py-20">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
