@@ -47,4 +47,6 @@ const Index = () => {
 	);
 };
 
+//Need more changes to suit the differentiation between the dark and the light mode...
+
 export default Index;
