@@ -103,7 +103,7 @@ const HeroSection = () => {
 							Powered by Experience
 						</h1>
 						<p className="text-xl lg:text-2xl mb-8 text-blue-100 leading-relaxed hover:text-white transition-colors duration-300">
-							5+ years of trusted service delivering end-to-end logistics
+							20+ years of trusted service delivering end-to-end logistics
 							solutions to Tech companies across Hyderabad.
 						</p>
 						<div className="flex flex-col sm:flex-row gap-4">

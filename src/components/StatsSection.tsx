@@ -4,7 +4,7 @@ import { TrendingUp, Users, Clock, Award } from "lucide-react";
 const StatsSection = () => {
 	const stats = [
 		{
-			number: 5,
+			number: 20,
 			suffix: "+",
 			label: "Years of Experience",
 			desc: "Serving corporate clients since 2009",
@@ -12,7 +12,7 @@ const StatsSection = () => {
 			color: "text-blue-400",
 		},
 		{
-			number: 50,
+			number: 450,
 			suffix: "+",
 			label: "Fleet Size",
 			desc: "Modern vehicles including EVs",

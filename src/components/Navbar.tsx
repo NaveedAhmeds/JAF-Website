@@ -73,7 +73,7 @@ export default function Navbar() {
 					}`}
 			>
 				<div className="text-2xl font-bold cursor-pointer select-none">
-					JAF Logistics
+					JAF Logistic
 				</div>
 
 				{/* Desktop nav links */}

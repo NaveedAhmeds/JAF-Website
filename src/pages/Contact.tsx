@@ -27,12 +27,12 @@ const fadeFlip = {
 const contactInfo = [
 	{
 		title: "Phone",
-		details: ["+91 98481 47003"],
+		details: ["+91 89786 33600"],
 		icon: "📞",
 	},
 	{
 		title: "Email",
-		details: ["info@jaflogistics.com", "operations@jaflogistics.com"],
+		details: ["info@jaflogistic.in"],
 		icon: "📧",
 	},
 	{
@@ -266,7 +266,7 @@ const Contact = () => {
 										24/7 Crisis Management Hotline
 									</p>
 									<p className="font-semibold text-red-900 dark:text-red-200">
-										+91 98481 47003
+										+91 89786 33600
 									</p>
 									<p className="text-sm text-red-700 dark:text-red-400 mt-2">
 										For urgent transportation issues, breakdowns, or emergencies
@@ -306,7 +306,7 @@ const Contact = () => {
 									<p>Hyderabad, Telangana 500008</p>
 									<p>India</p>
 								</div>
-								<p className="text-orange-500 font-semibold">+91 98481 47003</p>
+								<p className="text-orange-500 font-semibold">+91 89786 33600</p>
 							</CardContent>
 						</Card>
 					</div>

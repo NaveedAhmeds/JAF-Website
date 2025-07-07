@@ -4,8 +4,12 @@ const Footer = () => {
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 				{/* Logo */}
 				<div className="text-2xl font-bold mb-2 cursor-default select-none">
-					JAF <span className="text-orange-500">Logistics</span>
+					JAF <span className="text-orange-500">Logistic</span>
 				</div>
+				{/* Commitment to Quality */}
+				<p className="text-lg font-semibold text-gray-600 dark:text-gray-300 tracking-wide italic">
+					<span className="text-orange-500">Commitment</span> to Quality
+				</p>
 			</div>
 
 			{/* Copyright with Easter Egg */}
@@ -15,7 +19,7 @@ const Footer = () => {
 				title="Click me"
 			>
 				<p>
-					&copy; 2024 JAF Logistics. All rights reserved. | Reliable Corporate
+					&copy; 2024 JAF Logistic. All rights reserved. | Reliable Corporate
 					Transportation Since 2009
 				</p>
 			</div>

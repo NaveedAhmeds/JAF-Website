@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -22,7 +23,6 @@ const services = [
 		title: "Employee Transportation",
 		description:
 			"Comprehensive daily commute solutions designed for corporate workforces with emphasis on safety, punctuality, and comfort.",
-		icon: "🚐",
 		features: [
 			"Door-to-door pickup and drop",
 			"Real-time GPS tracking",
@@ -42,7 +42,6 @@ const services = [
 		title: "Car Rentals",
 		description:
 			"Flexible short-term rental solutions for corporate executives, business meetings, and temporary transportation needs.",
-		icon: "🚗",
 		features: [
 			"Self-drive and chauffeur options",
 			"Premium vehicle selection",
@@ -62,7 +61,6 @@ const services = [
 		title: "Long Term Rentals",
 		description:
 			"Cost-effective long-term vehicle solutions with flexible contracts tailored for extended corporate requirements.",
-		icon: "📅",
 		features: [
 			"Flexible contract terms",
 			"Maintenance included",
@@ -82,7 +80,6 @@ const services = [
 		title: "Event Transport",
 		description:
 			"Seamless transportation coordination for corporate events, conferences, seminars, and special occasions of any scale.",
-		icon: "🎉",
 		features: [
 			"Group transportation coordination",
 			"VIP and executive services",
@@ -102,7 +99,6 @@ const services = [
 		title: "Airport Transfers",
 		description:
 			"Professional airport pickup and drop services ensuring punctual, comfortable, and hassle-free travel experience.",
-		icon: "✈️",
 		features: [
 			"Flight tracking and monitoring",
 			"Meet and greet services",
@@ -122,7 +118,6 @@ const services = [
 		title: "Fleet Management",
 		description:
 			"Comprehensive end-to-end fleet management services including maintenance, compliance, optimization, and reporting.",
-		icon: "⚙️",
 		features: [
 			"Preventive maintenance scheduling",
 			"Compliance audit and management",
@@ -141,6 +136,8 @@ const services = [
 ];
 
 const Services = () => {
+	const navigate = useNavigate();
+
 	return (
 		<div className="pt-16 bg-gray-50 dark:bg-black relative overflow-hidden transition-colors duration-500">
 			{/* Background dots */}
@@ -186,15 +183,10 @@ const Services = () => {
 						>
 							<Card className="hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 border-0 shadow-lg bg-white dark:bg-zinc-900">
 								<CardHeader className="pb-6">
-									<div className="flex items-center mb-4">
-										<div className="text-4xl mr-4 animate-pulse">
-											{service.icon}
-										</div>
-										<CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
-											{service.title}
-										</CardTitle>
-									</div>
-									<p className="text-gray-600 dark:text-gray-300 text-lg">
+									<CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
+										{service.title}
+									</CardTitle>
+									<p className="text-gray-600 dark:text-gray-300 text-lg mt-2">
 										{service.description}
 									</p>
 								</CardHeader>
@@ -234,7 +226,10 @@ const Services = () => {
 										</div>
 									</div>
 									<div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-										<Button className="w-full bg-blue-900 hover:bg-blue-800 dark:bg-blue-800 dark:hover:bg-blue-700 text-white">
+										<Button
+											className="w-full bg-blue-900 hover:bg-blue-800 dark:bg-blue-800 dark:hover:bg-blue-700 text-white"
+											onClick={() => navigate("/contact")}
+										>
 											Request Quote for {service.title}
 										</Button>
 									</div>
