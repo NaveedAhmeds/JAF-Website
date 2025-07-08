@@ -261,20 +261,17 @@ const About = () => {
 					</ul>
 				</div>
 				<motion.div
-					className="rounded-2xl p-8 shadow-md border border-orange-300 dark:border-orange-600 cursor-default"
-					initial={{ opacity: 0, x: 30 }}
-					whileInView={{ opacity: 1, x: 0 }}
-					transition={{ duration: 0.6 }}
+					className="p-8 rounded-2xl shadow-lg border border-orange-300 dark:border-orange-600 bg-white dark:bg-zinc-900 cursor-default"
+					initial={{ opacity: 0, scale: 0.95 }}
+					whileInView={{ opacity: 1, scale: 1 }}
+					transition={{ duration: 0.5, ease: "easeOut" }}
 					viewport={{ once: true }}
-					whileHover={{ boxShadow: "0 0 20px 6px rgba(255,165,0,0.35)" }}
-					style={{
-						backgroundColor:
-							theme === "dark"
-								? "rgba(39,39,42,0.85)"
-								: "rgba(239,246,255,0.9)",
+					whileHover={{
+						scale: 1.05,
+						boxShadow: "0 0 15px 3px rgba(255, 165, 0, 0.5)",
 					}}
 				>
-					<h3 className="text-2xl font-bold text-orange-600 dark:text-orange-400 mb-4">
+					<h3 className="text-2xl font-bold mb-4 text-orange-600 dark:text-orange-400">
 						Crisis Moments
 					</h3>
 					<p className="text-gray-700 dark:text-gray-300 mb-4">
