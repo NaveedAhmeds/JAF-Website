@@ -97,32 +97,11 @@ const Contact = () => {
 
 		emailjs
 			.send(
-				"service_9ouddnp",
-				"template_e7vtxjq", // Your internal notification template ID
-				{
-					firstName: formData.firstName,
-					lastName: formData.lastName,
-					email: formData.email,
-					phone: formData.phone,
-					company: formData.company,
-					service: formData.service,
-					message: formData.message,
-				},
-				"BNv-WWz1-57JXz6IZ"
+				"service_h24s848",
+				"template_6kgn3hh",
+				formData,
+				"c8fK0-Jt3ErnkFJz-"
 			)
-			.then(() => {
-				// Send confirmation email to user
-				return emailjs.send(
-					"service_9ouddnp",
-					"template_confirmation", // Your confirmation email template ID
-					{
-						to_email: formData.email,
-						to_name: `${formData.firstName} ${formData.lastName}`,
-						service: formData.service,
-					},
-					"BNv-WWz1-57JXz6IZ"
-				);
-			})
 			.then(() => {
 				setShowSuccess(true);
 				setTimeout(() => setShowSuccess(false), 4000);
@@ -197,7 +176,7 @@ const Contact = () => {
 						exit={{ y: -50, opacity: 0 }}
 						className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50"
 					>
-						You da MVP, message sent!
+						message sent!
 					</motion.div>
 				)}
 			</AnimatePresence>
@@ -499,36 +478,16 @@ const Contact = () => {
 									<p>Hyderabad, Telangana 500008</p>
 									<p>India</p>
 								</div>
-								<p className="text-orange-500 font-semibold">+91 89786 33600</p>
+								<a
+									href="https://maps.google.com/?q=Zehra+Towers,+8-1-43/A/66,+Shaikpet+Rd,+Hyderabad"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="inline-block bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600 transition-colors duration-300"
+								>
+									View on Google Maps
+								</a>
 							</CardContent>
 						</Card>
-					</div>
-				</div>
-			</section>
-
-			{/* Map Section */}
-			<section className="py-20 bg-gray-50 dark:bg-zinc-900">
-				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<div className="text-center mb-12">
-						<h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-							Find Us
-						</h2>
-						<p className="text-lg text-gray-600 dark:text-gray-300">
-							Hyderabad, Telangana
-						</p>
-					</div>
-
-					<div className="rounded-lg overflow-hidden border border-gray-300 dark:border-gray-700 shadow-lg max-w-5xl mx-auto h-96">
-						<iframe
-							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.330280137995!2d78.3977447!3d17.4004688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9775fa33e0db%3A0xafe8a49c9ea40d94!2sJAF%20logistic!5e0!3m2!1sen!2sin!4v1688532912867!5m2!1sen!2sin"
-							width="100%"
-							height="100%"
-							loading="lazy"
-							allowFullScreen
-							referrerPolicy="no-referrer-when-downgrade"
-							title="JAF Logistic Location"
-							style={{ border: 0 }}
-						/>
 					</div>
 				</div>
 			</section>
