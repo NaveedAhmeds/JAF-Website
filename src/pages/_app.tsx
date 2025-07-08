@@ -1,13 +1,33 @@
-// pages/_app.tsx
-import { useEffect } from "react";
-import type { AppProps } from "next/app";
-import "../styles/globals.css"; // adjust path if different
+// pages/_document.tsx
+import { Html, Head, Main, NextScript } from "next/document";
 
-export default function MyApp({ Component, pageProps }: AppProps) {
-	useEffect(() => {
-		// Remove 'dark' class to force light mode on initial load
-		document.documentElement.classList.remove("dark");
-	}, []);
-
-	return <Component {...pageProps} />;
+export default function Document() {
+	return (
+		<Html lang="en">
+			<Head>
+				{/* Prevent flash of dark mode */}
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `
+							(function () {
+								try {
+									const theme = localStorage.getItem("theme");
+									const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+									if (theme === "dark" || (!theme && prefersDark)) {
+										document.documentElement.classList.add("dark");
+									} else {
+										document.documentElement.classList.remove("dark");
+									}
+								} catch (_) {}
+							})();
+						`,
+					}}
+				/>
+			</Head>
+			<body>
+				<Main />
+				<NextScript />
+			</body>
+		</Html>
+	);
 }
