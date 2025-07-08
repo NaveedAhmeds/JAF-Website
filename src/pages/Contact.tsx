@@ -73,6 +73,17 @@ const Contact = () => {
 						transparent 1px
 					);
 				}
+
+				/* Force white labels in the form and info section on dark mode */
+				.dark section.py-20 label {
+					color: #fff !important;
+				}
+
+				/* Optional: lighter placeholders for dark mode */
+				.dark section.py-20 input::placeholder,
+				.dark section.py-20 textarea::placeholder {
+					color: #bbb !important;
+				}
 			`}</style>
 
 			{/* Hero Section */}
@@ -102,11 +113,10 @@ const Contact = () => {
 			</section>
 
 			{/* Contact Form & Info */}
-			<section className="py-20 bg-white dark:bg-black">
+			<section className="py-20">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-						{/* Contact Form */}
-						<Card className="border-0 shadow-lg">
+						<Card className="border-0 rounded-2xl bg-white/70 dark:bg-white/5 backdrop-blur-md shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.15)] transition-shadow duration-300">
 							<CardHeader>
 								<CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
 									Get Your Quote
@@ -117,53 +127,26 @@ const Contact = () => {
 								</p>
 							</CardHeader>
 							<CardContent className="space-y-6">
-								<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-									<div className="space-y-2">
-										<Label htmlFor="firstName">First Name *</Label>
+								{[
+									{ id: "firstName", label: "First Name *" },
+									{ id: "lastName", label: "Last Name *" },
+									{ id: "email", label: "Email *", type: "email" },
+									{ id: "phone", label: "Phone Number *", type: "tel" },
+									{ id: "company", label: "Company Name *" },
+								].map(({ id, label, type }) => (
+									<div className="space-y-2" key={id}>
+										<Label htmlFor={id}>{label}</Label>
 										<Input
-											id="firstName"
-											placeholder="Enter your first name"
+											id={id}
+											type={type || "text"}
+											placeholder={`Enter your ${label
+												.toLowerCase()
+												.replace(" *", "")}`}
 											required
+											className="bg-white dark:bg-zinc-900 dark:border-gray-700 dark:text-white"
 										/>
 									</div>
-									<div className="space-y-2">
-										<Label htmlFor="lastName">Last Name *</Label>
-										<Input
-											id="lastName"
-											placeholder="Enter your last name"
-											required
-										/>
-									</div>
-								</div>
-
-								<div className="space-y-2">
-									<Label htmlFor="email">Email *</Label>
-									<Input
-										id="email"
-										type="email"
-										placeholder="Enter your email address"
-										required
-									/>
-								</div>
-
-								<div className="space-y-2">
-									<Label htmlFor="phone">Phone Number *</Label>
-									<Input
-										id="phone"
-										type="tel"
-										placeholder="Enter your phone number"
-										required
-									/>
-								</div>
-
-								<div className="space-y-2">
-									<Label htmlFor="company">Company Name *</Label>
-									<Input
-										id="company"
-										placeholder="Enter your company name"
-										required
-									/>
-								</div>
+								))}
 
 								<div className="space-y-2">
 									<Label htmlFor="service">Service Required *</Label>
@@ -171,10 +154,10 @@ const Contact = () => {
 										onValueChange={(value) => setService(value)}
 										value={service}
 									>
-										<SelectTrigger>
+										<SelectTrigger className="bg-white dark:bg-zinc-900 dark:border-gray-700 dark:text-white">
 											<SelectValue placeholder="Select service type" />
 										</SelectTrigger>
-										<SelectContent>
+										<SelectContent className="bg-white dark:bg-zinc-900 dark:text-white">
 											<SelectItem value="employee-transport">
 												Employee Transportation
 											</SelectItem>
@@ -204,11 +187,12 @@ const Contact = () => {
 										id="message"
 										placeholder="Tell us about your specific requirements..."
 										rows={4}
+										className="bg-white dark:bg-zinc-900 dark:border-gray-700 dark:text-white"
 									/>
 								</div>
 
 								<Button
-									className="w-full bg-orange-500 hover:bg-orange-600 text-white text-lg py-3"
+									className="w-full bg-orange-500 hover:bg-orange-600 text-white text-lg py-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
 									type="submit"
 								>
 									Send Inquiry
@@ -221,7 +205,6 @@ const Contact = () => {
 							</CardContent>
 						</Card>
 
-						{/* Contact Information */}
 						<div className="space-y-8">
 							<div>
 								<h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
@@ -231,7 +214,7 @@ const Contact = () => {
 									{contactInfo.map((info, index) => (
 										<Card
 											key={index}
-											className="border-0 shadow-md hover:shadow-lg transition-shadow duration-300"
+											className="border-0 bg-white dark:bg-zinc-900 shadow-md hover:shadow-lg transition duration-300 rounded-xl"
 										>
 											<CardContent className="p-6">
 												<div className="flex items-start">
@@ -256,8 +239,7 @@ const Contact = () => {
 								</div>
 							</div>
 
-							{/* Emergency Contact */}
-							<Card className="border-0 shadow-lg bg-red-50 dark:bg-red-900 border-l-4 border-l-red-500">
+							<Card className="border-0 shadow-lg bg-red-50 dark:bg-red-900 border-l-4 border-red-500 rounded-xl">
 								<CardContent className="p-6">
 									<h3 className="font-bold text-red-900 dark:text-red-400 mb-2 flex items-center">
 										🚨 Emergency Support
