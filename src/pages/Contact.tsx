@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -53,7 +54,54 @@ const contactInfo = [
 ];
 
 const Contact = () => {
-	const [service, setService] = useState("");
+	const [formData, setFormData] = useState({
+		firstName: "",
+		lastName: "",
+		email: "",
+		phone: "",
+		company: "",
+		service: "",
+		message: "",
+	});
+
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		// Validate required fields here if needed (optional)
+
+		emailjs
+			.send(
+				"service_9ouddnp",
+				"template_e7vtxjq",
+				{
+					firstName: formData.firstName,
+					lastName: formData.lastName,
+					email: formData.email,
+					phone: formData.phone,
+					company: formData.company,
+					service: formData.service,
+					message: formData.message,
+				},
+				"BNv-WWz1-57JXz6IZ"
+			)
+			.then((response) => {
+				console.log("SUCCESS!", response.status, response.text);
+				alert("Message sent! We'll get back to you ASAP.");
+				setFormData({
+					firstName: "",
+					lastName: "",
+					email: "",
+					phone: "",
+					company: "",
+					service: "",
+					message: "",
+				});
+			})
+			.catch((err) => {
+				console.error("FAILED...", err);
+				alert("Oops! Something went wrong. Try again later.");
+			});
+	};
 
 	return (
 		<div className="pt-16 bg-white dark:bg-black text-gray-900 dark:text-white bg-dotted-light">
@@ -116,7 +164,10 @@ const Contact = () => {
 			<section className="py-20">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-						<Card className="border-0 rounded-2xl bg-white/70 dark:bg-white/5 backdrop-blur-md shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.15)] transition-shadow duration-300">
+						<form
+							onSubmit={handleSubmit}
+							className="border-0 rounded-2xl bg-white/70 dark:bg-white/5 backdrop-blur-md shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.15)] transition-shadow duration-300"
+						>
 							<CardHeader>
 								<CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
 									Get Your Quote
@@ -138,12 +189,17 @@ const Contact = () => {
 										<Label htmlFor={id}>{label}</Label>
 										<Input
 											id={id}
+											name={id}
 											type={type || "text"}
 											placeholder={`Enter your ${label
 												.toLowerCase()
 												.replace(" *", "")}`}
 											required
 											className="bg-white dark:bg-zinc-900 dark:border-gray-700 dark:text-white"
+											value={formData[id as keyof typeof formData]}
+											onChange={(e) =>
+												setFormData({ ...formData, [id]: e.target.value })
+											}
 										/>
 									</div>
 								))}
@@ -151,8 +207,11 @@ const Contact = () => {
 								<div className="space-y-2">
 									<Label htmlFor="service">Service Required *</Label>
 									<Select
-										onValueChange={(value) => setService(value)}
-										value={service}
+										onValueChange={(value) =>
+											setFormData({ ...formData, service: value })
+										}
+										value={formData.service}
+										name="service"
 									>
 										<SelectTrigger className="bg-white dark:bg-zinc-900 dark:border-gray-700 dark:text-white">
 											<SelectValue placeholder="Select service type" />
@@ -185,9 +244,14 @@ const Contact = () => {
 									<Label htmlFor="message">Message</Label>
 									<Textarea
 										id="message"
-										placeholder="Tell us about your specific requirements..."
+										name="message"
+										placeholder="Provide details about your specific requirements, including your preferred date and time for the meeting..."
 										rows={4}
 										className="bg-white dark:bg-zinc-900 dark:border-gray-700 dark:text-white"
+										value={formData.message}
+										onChange={(e) =>
+											setFormData({ ...formData, message: e.target.value })
+										}
 									/>
 								</div>
 
@@ -203,7 +267,7 @@ const Contact = () => {
 									share your information.
 								</p>
 							</CardContent>
-						</Card>
+						</form>
 
 						<div className="space-y-8">
 							<div>
@@ -315,7 +379,7 @@ const Contact = () => {
 							loading="lazy"
 							allowFullScreen
 							referrerPolicy="no-referrer-when-downgrade"
-							title="JAF Logistics Location"
+							title="JAF Logistic Location"
 							style={{ border: 0 }}
 						/>
 					</div>
