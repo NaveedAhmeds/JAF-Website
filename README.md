@@ -87,7 +87,7 @@ MIT License © 2025 Naveed Ahmed Syed — do your thing, just give credit where 
 👋 Hey, I’m Naveed! Reach out if you wanna chat logistics, coding, or just share weird real-life analogies.
 
 - GitHub: [NaveedAhmeds](https://github.com/NaveedAhmeds)  
-- Email: [your.email@example.com] (replace this with your actual email)  
+- Email: syednaveed2006@gmail.com
 
 ---
 
