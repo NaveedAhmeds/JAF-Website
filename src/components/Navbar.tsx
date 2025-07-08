@@ -72,9 +72,18 @@ export default function Navbar() {
 							: "bg-white/70 text-gray-900"
 					}`}
 			>
-				<div className="text-2xl font-bold cursor-pointer select-none">
-					JAF Logistic
-				</div>
+				{/* Logo + Name */}
+				<Link
+					to="/"
+					className="flex items-center gap-2 text-2xl font-bold cursor-pointer select-none"
+				>
+					<img
+						src="Images/JAF_logo.jpeg"
+						alt="JAF Logo"
+						className="h-8 w-8 object-contain transition-transform duration-300 hover:rotate-6"
+					/>
+					<span>JAF Logistic</span>
+				</Link>
 
 				{/* Desktop nav links */}
 				<ul className="hidden md:flex gap-8">
@@ -89,7 +98,7 @@ export default function Navbar() {
 										? "text-gray-300 hover:text-orange-400"
 										: "text-gray-700 hover:text-orange-500"
 								}`}
-								onClick={() => setMenuOpen(false)} // close menu if clicking link (extra safe)
+								onClick={() => setMenuOpen(false)}
 							>
 								{label}
 							</Link>
