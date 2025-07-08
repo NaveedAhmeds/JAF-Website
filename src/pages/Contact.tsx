@@ -14,7 +14,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const fadeFlip = {
 	hidden: { opacity: 0, rotateX: -90 },
@@ -64,15 +64,41 @@ const Contact = () => {
 		message: "",
 	});
 
+	const [errors, setErrors] = useState<{ [key: string]: string }>({});
+	const [showSuccess, setShowSuccess] = useState(false);
+
+	const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const val = e.target.value.replace(/\D/g, "");
+		if (val.length <= 10) {
+			setFormData({ ...formData, phone: val });
+		}
+	};
+
+	const validate = () => {
+		const newErrors: { [key: string]: string } = {};
+
+		if (!formData.firstName.trim())
+			newErrors.firstName = "First name can't ghost us.";
+		if (!formData.lastName.trim())
+			newErrors.lastName = "Last name is kinda important.";
+		if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
+			newErrors.email = "Email looking sus, fix it.";
+		if (formData.phone.length !== 10)
+			newErrors.phone = "Phone needs 10 digits, no more no less.";
+		if (!formData.service) newErrors.service = "Pick a service, don’t be shy.";
+
+		setErrors(newErrors);
+		return Object.keys(newErrors).length === 0;
+	};
+
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-
-		// Validate required fields here if needed (optional)
+		if (!validate()) return;
 
 		emailjs
 			.send(
 				"service_9ouddnp",
-				"template_e7vtxjq",
+				"template_e7vtxjq", // Your internal notification template ID
 				{
 					firstName: formData.firstName,
 					lastName: formData.lastName,
@@ -84,9 +110,22 @@ const Contact = () => {
 				},
 				"BNv-WWz1-57JXz6IZ"
 			)
-			.then((response) => {
-				console.log("SUCCESS!", response.status, response.text);
-				alert("Message sent! We'll get back to you ASAP.");
+			.then(() => {
+				// Send confirmation email to user
+				return emailjs.send(
+					"service_9ouddnp",
+					"template_confirmation", // Your confirmation email template ID
+					{
+						to_email: formData.email,
+						to_name: `${formData.firstName} ${formData.lastName}`,
+						service: formData.service,
+					},
+					"BNv-WWz1-57JXz6IZ"
+				);
+			})
+			.then(() => {
+				setShowSuccess(true);
+				setTimeout(() => setShowSuccess(false), 4000);
 				setFormData({
 					firstName: "",
 					lastName: "",
@@ -96,6 +135,7 @@ const Contact = () => {
 					service: "",
 					message: "",
 				});
+				setErrors({});
 			})
 			.catch((err) => {
 				console.error("FAILED...", err);
@@ -104,7 +144,7 @@ const Contact = () => {
 	};
 
 	return (
-		<div className="pt-16 bg-white dark:bg-black text-gray-900 dark:text-white bg-dotted-light">
+		<div className="pt-16 bg-white dark:bg-black text-gray-900 dark:text-white bg-dotted-light relative">
 			<style jsx global>{`
 				.bg-dotted-light {
 					background-image: radial-gradient(
@@ -121,18 +161,46 @@ const Contact = () => {
 						transparent 1px
 					);
 				}
-
-				/* Force white labels in the form and info section on dark mode */
 				.dark section.py-20 label {
 					color: #fff !important;
 				}
-
-				/* Optional: lighter placeholders for dark mode */
 				.dark section.py-20 input::placeholder,
 				.dark section.py-20 textarea::placeholder {
 					color: #bbb !important;
 				}
+
+				@keyframes shake {
+					0%,
+					100% {
+						transform: translateX(0);
+					}
+					20%,
+					60% {
+						transform: translateX(-5px);
+					}
+					40%,
+					80% {
+						transform: translateX(5px);
+					}
+				}
+				.animate-shake {
+					animation: shake 0.3s ease-in-out;
+				}
 			`}</style>
+
+			{/* Success Toast */}
+			<AnimatePresence>
+				{showSuccess && (
+					<motion.div
+						initial={{ y: -50, opacity: 0 }}
+						animate={{ y: 0, opacity: 1 }}
+						exit={{ y: -50, opacity: 0 }}
+						className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50"
+					>
+						You da MVP, message sent!
+					</motion.div>
+				)}
+			</AnimatePresence>
 
 			{/* Hero Section */}
 			<section className="bg-transparent py-20">
@@ -166,6 +234,7 @@ const Contact = () => {
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
 						<form
 							onSubmit={handleSubmit}
+							noValidate
 							className="border-0 rounded-2xl bg-white/70 dark:bg-white/5 backdrop-blur-md shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.15)] transition-shadow duration-300"
 						>
 							<CardHeader>
@@ -184,36 +253,106 @@ const Contact = () => {
 									{ id: "email", label: "Email *", type: "email" },
 									{ id: "phone", label: "Phone Number *", type: "tel" },
 									{ id: "company", label: "Company Name *" },
-								].map(({ id, label, type }) => (
-									<div className="space-y-2" key={id}>
-										<Label htmlFor={id}>{label}</Label>
-										<Input
-											id={id}
-											name={id}
-											type={type || "text"}
-											placeholder={`Enter your ${label
-												.toLowerCase()
-												.replace(" *", "")}`}
-											required
-											className="bg-white dark:bg-zinc-900 dark:border-gray-700 dark:text-white"
-											value={formData[id as keyof typeof formData]}
-											onChange={(e) =>
-												setFormData({ ...formData, [id]: e.target.value })
-											}
-										/>
-									</div>
-								))}
+								].map(({ id, label, type }) => {
+									const hasError = !!errors[id];
+									if (id === "phone") {
+										return (
+											<div className="space-y-1" key={id}>
+												<Label
+													htmlFor={id}
+													className={hasError ? "text-red-500" : undefined}
+												>
+													{label}
+												</Label>
+												<Input
+													id={id}
+													name={id}
+													type="tel"
+													placeholder="Enter your phone number"
+													required
+													className={`bg-white dark:bg-zinc-900 dark:border-gray-700 dark:text-white ${
+														hasError ? "border-red-500" : ""
+													}`}
+													value={formData.phone}
+													onChange={handlePhoneChange}
+													maxLength={10}
+													inputMode="numeric"
+													pattern="[0-9]{10}"
+													title="Please enter exactly 10 digits."
+													aria-invalid={hasError}
+													aria-describedby={`${id}-error`}
+												/>
+												{hasError && (
+													<p
+														id={`${id}-error`}
+														className="text-sm text-red-500 animate-shake"
+													>
+														{errors[id]}
+													</p>
+												)}
+											</div>
+										);
+									}
+									return (
+										<div className="space-y-1" key={id}>
+											<Label
+												htmlFor={id}
+												className={hasError ? "text-red-500" : undefined}
+											>
+												{label}
+											</Label>
+											<Input
+												id={id}
+												name={id}
+												type={type || "text"}
+												placeholder={`Enter your ${label
+													.toLowerCase()
+													.replace(" *", "")}`}
+												required
+												className={`bg-white dark:bg-zinc-900 dark:border-gray-700 dark:text-white ${
+													hasError ? "border-red-500" : ""
+												}`}
+												value={formData[id as keyof typeof formData]}
+												onChange={(e) =>
+													setFormData({ ...formData, [id]: e.target.value })
+												}
+												aria-invalid={hasError}
+												aria-describedby={`${id}-error`}
+											/>
+											{hasError && (
+												<p
+													id={`${id}-error`}
+													className="text-sm text-red-500 animate-shake"
+												>
+													{errors[id]}
+												</p>
+											)}
+										</div>
+									);
+								})}
 
-								<div className="space-y-2">
-									<Label htmlFor="service">Service Required *</Label>
+								<div className="space-y-1">
+									<Label
+										htmlFor="service"
+										className={errors.service ? "text-red-500" : undefined}
+									>
+										Service Required *
+									</Label>
 									<Select
 										onValueChange={(value) =>
 											setFormData({ ...formData, service: value })
 										}
 										value={formData.service}
 										name="service"
+										required
+										aria-invalid={!!errors.service}
+										aria-describedby="service-error"
 									>
-										<SelectTrigger className="bg-white dark:bg-zinc-900 dark:border-gray-700 dark:text-white">
+										<SelectTrigger
+											className={`bg-white dark:bg-zinc-900 dark:border-gray-700 dark:text-white ${
+												errors.service ? "border-red-500" : ""
+											}`}
+										>
 											<SelectValue placeholder="Select service type" />
 										</SelectTrigger>
 										<SelectContent className="bg-white dark:bg-zinc-900 dark:text-white">
@@ -238,6 +377,14 @@ const Contact = () => {
 											</SelectItem>
 										</SelectContent>
 									</Select>
+									{errors.service && (
+										<p
+											id="service-error"
+											className="text-sm text-red-500 animate-shake"
+										>
+											{errors.service}
+										</p>
+									)}
 								</div>
 
 								<div className="space-y-2">
@@ -256,7 +403,7 @@ const Contact = () => {
 								</div>
 
 								<Button
-									className="w-full bg-orange-500 hover:bg-orange-600 text-white text-lg py-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
+									className="w-full bg-orange-500 hover:bg-orange-600 text-white text-lg py-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-orange-400/70"
 									type="submit"
 								>
 									Send Inquiry
