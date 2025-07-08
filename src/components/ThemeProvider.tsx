@@ -1,11 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-type Theme = "dark" | "light" | "system";
+type Theme = "light"; // Only allow light mode now
 
 type ThemeProviderProps = {
 	children: React.ReactNode;
-	defaultTheme?: Theme;
-	storageKey?: string;
 };
 
 type ThemeProviderState = {
@@ -14,63 +12,28 @@ type ThemeProviderState = {
 };
 
 const initialState: ThemeProviderState = {
-	theme: "system",
+	theme: "light",
 	setTheme: () => null,
 };
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
-export function ThemeProvider({
-	children,
-	defaultTheme = "light", // Set light as default
-	storageKey = "vite-ui-theme",
-	...props
-}: ThemeProviderProps) {
-	const [theme, setTheme] = useState<Theme>(defaultTheme);
-	const [isMounted, setIsMounted] = useState(false); // To prevent SSR mismatch
+export function ThemeProvider({ children }: ThemeProviderProps) {
+	const [theme, setTheme] = useState<Theme>("light");
 
 	useEffect(() => {
 		const root = window.document.documentElement;
-		const storedTheme = localStorage.getItem(storageKey) as Theme | null;
-
-		const resolvedTheme =
-			storedTheme ||
-			(defaultTheme === "system"
-				? window.matchMedia("(prefers-color-scheme: dark)").matches
-					? "dark"
-					: "light"
-				: defaultTheme);
-
-		root.classList.remove("light", "dark");
-		root.classList.add(resolvedTheme);
-		setTheme(resolvedTheme);
-		setIsMounted(true);
-	}, [defaultTheme, storageKey]);
+		root.classList.remove("dark");
+		root.classList.add("light");
+	}, []); // Run only once on mount
 
 	const value = {
 		theme,
-		setTheme: (newTheme: Theme) => {
-			const root = window.document.documentElement;
-			localStorage.setItem(storageKey, newTheme);
-			root.classList.remove("light", "dark");
-			if (newTheme === "system") {
-				const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-					.matches
-					? "dark"
-					: "light";
-				root.classList.add(systemTheme);
-				setTheme("system");
-			} else {
-				root.classList.add(newTheme);
-				setTheme(newTheme);
-			}
-		},
+		setTheme: () => {}, // Disable changing theme
 	};
 
-	if (!isMounted) return null; // Prevents flashing wrong theme
-
 	return (
-		<ThemeProviderContext.Provider {...props} value={value}>
+		<ThemeProviderContext.Provider value={value}>
 			{children}
 		</ThemeProviderContext.Provider>
 	);
@@ -78,7 +41,6 @@ export function ThemeProvider({
 
 export const useTheme = () => {
 	const context = useContext(ThemeProviderContext);
-	if (context === undefined)
-		throw new Error("useTheme must be used within a ThemeProvider");
+	if (!context) throw new Error("useTheme must be used within a ThemeProvider");
 	return context;
 };
