@@ -89,6 +89,3 @@ MIT License © 2025 Naveed Ahmed Syed — do your thing, just give credit where 
 - GitHub: [NaveedAhmeds](https://github.com/NaveedAhmeds)  
 - Email: syednaveed2006@gmail.com
 
----
-
-**Now go make the internet a better place with this beauty!**
